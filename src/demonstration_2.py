@@ -68,4 +68,43 @@ def find_judge(N, trust):
     int
     """
     # Your code here
+    # N people in the town. Labeled from 1-N
+    trustedPeople = [[0]*N for _ in range(N)]
+
+    for relationship in trust:
+        personA = relationship[0]
+        personB = relationship[1]
+
+        # update trustedPeople matrix
+        trustedPeople[personA-1][personB-1] = 1
+
+    for i in range(len(trustedPeople)):
+        person = trustedPeople[i]
+
+        print(f'Person: {i+1}. Trusted: {person}')
+
+        counter = 0
+        for personB in trustedPeople:
+            if personB[i] == 1:
+                counter += 1
+
+
+        if person.count(0) == N and counter == N-1:
+            return i+1
+
+    return -1
+
+
+
+
+print(find_judge(4, [[1,3],[1,4],[2,3],[2,4],[4,3]]))
+
+print(find_judge(3, [[1,2],[2,3]]))
+
+print(find_judge(3, [[1,3],[2,3],[3,1]]))
+
+print(find_judge(3, [[1,3],[2,3]]))
+
+print(find_judge(2, [[1,2]]))
+
 
