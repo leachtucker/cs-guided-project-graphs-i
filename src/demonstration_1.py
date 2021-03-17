@@ -18,8 +18,20 @@ class GraphNode:
 
 def color_graph(graph, colors):
     # Your code here
+    for node in graph:
+        legalColors = colors.copy()
 
-                
+        # Find the restricted colors for this node and remove the from our legal colors list above ^
+        for neighbor in node.neighbors:
+            if neighbor.color is not None and neighbor.color in legalColors:
+                # Find the index and pop it
+                colorIdx = legalColors.index(neighbor.color)
+                legalColors.pop(colorIdx)
+
+        # Set the node's color to the first item in the legal colors list
+        node.color = legalColors[0]
+
+
 g1 = GraphNode('G1')
 g2 = GraphNode('G2')
 g3 = GraphNode('G3')
@@ -48,6 +60,7 @@ g5.neighbors.add(g3)
 g5.neighbors.add(g4)
 
 graph = [g1, g2, g3, g4, g5]
+colors = ['red', 'green', 'blue', 'purple', 'orange']
 
 color_graph(graph, colors)
 
