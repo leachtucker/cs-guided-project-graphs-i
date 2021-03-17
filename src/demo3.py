@@ -75,8 +75,5 @@ graph.add_edge('B', 'C')
 graph.add_edge('C', 'D')
 graph.add_edge('C', 'E')
 
-# print(graph.get_vertices())
-# print(graph.get_edges())
-
 print(graph.get_paths('A'))
 
